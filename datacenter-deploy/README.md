@@ -1,3 +1,3 @@
 ## Tutorial URL
 
-https://learn.hashicorp.com/tutorials/consul/datacenter-deployment-with-docker-compose
+https://learn.hashicorp.com/tutorials/consul/datacenter-deploy-with-docker-compose
