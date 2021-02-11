@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  
+  consul-server:
+    image: consul:latest
+    container_name: consul-server
+    restart: always
+    volumes:
+     - ./server.json:/consul/config/server.json:ro
+    networks:
+      - consul
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+      - "8600:8600/udp"
+    command: "agent -config-dir=/consul/config"
+
+  consul-client:
+    image: consul:latest
+    container_name: consul-client
+    restart: always
+    volumes:
+     - ./client.json:/consul/config/client.json:ro
+    networks:
+      - consul
+    command: "agent -config-dir=/consul/config"
+
+networks:
+  consul:
+    driver: bridge
+
