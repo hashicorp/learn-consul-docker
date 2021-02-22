@@ -6,4 +6,4 @@ website.
 
 Specifically, the following articles and collections are currently supported by this repo.
 
-- [Deploy a Consul Datacenter with Docker Compose](https://learn.hashicorp.com/tutorials/consul/datacenter-deploy-with-docker-compose)
+- [Deploy a Consul Datacenter with Docker Compose](https://learn.hashicorp.com/tutorials/consul/docker-compose-datacenter)
