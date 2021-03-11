@@ -11,7 +11,6 @@
     "verify_outgoing": true,
     "verify_server_hostname": true,
     "ca_file": "/consul/config/certs/consul-agent-ca.pem",
-    "auto_encrypt": {
-      "tls": true
-    }
+    "cert_file": "/consul/config/certs/dc1-server-consul-0.pem",
+    "key_file": "/consul/config/certs/dc1-server-consul-0-key.pem"
 }
