@@ -1,0 +1,35 @@
+{
+    "node_name": "consul-server3",
+    "server": true,
+    "ui_config": {
+        "enabled" : true
+    },
+    "data_dir": "/consul/data",
+    "addresses": {
+        "http" : "0.0.0.0"
+    },
+    "retry_join":[
+        "consul-server1",
+        "consul-server2"
+    ],
+    "acl": {
+        "enabled": true,
+        "default_policy": "allow",
+        "down_policy": "extend-cache",
+        "enable_token_persistence" : true
+    },
+    "audit": {
+        "enabled": true,
+        "sink": {
+            "My sink": {
+                "type": "file",
+                "format": "json",
+                "path": "/consul/data/audit.json",
+                "delivery_guarantee": "best-effort",
+                "rotate_duration": "24h",
+                "rotate_max_files": 15,
+                "rotate_bytes": 25165824
+            }
+        }
+    }
+}
