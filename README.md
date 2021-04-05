@@ -7,3 +7,5 @@ website.
 Specifically, the following articles and collections are currently supported by this repo.
 
 - [Deploy a Consul Datacenter with Docker Compose](https://learn.hashicorp.com/tutorials/consul/docker-compose-datacenter)
+
+- [Capture Consul Events with Audit Logging](https://learn.hashicorp.com/tutorials/consul/audit-logging)
