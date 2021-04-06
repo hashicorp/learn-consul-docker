@@ -21,5 +21,5 @@ Deploy a Consul datacenter containing agents with a preconfigured DNS service an
 
 ## Additional information
 
-[https://learn.hashicorp.com/collections/consul/docker](https://learn.hashicorp.com/collections/consul/docker)
-[https://learn.hashicorp.com/tutorials/consul/get-started-service-discovery](https://learn.hashicorp.com/tutorials/consul/get-started-service-discovery)
+- [https://learn.hashicorp.com/collections/consul/docker](https://learn.hashicorp.com/collections/consul/docker)
+- [https://learn.hashicorp.com/tutorials/consul/get-started-service-discovery](https://learn.hashicorp.com/tutorials/consul/get-started-service-discovery)

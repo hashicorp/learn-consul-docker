@@ -33,5 +33,5 @@ Consul Intentions enables secure communication between the services in a service
 
 ## Additional information
 
-[https://learn.hashicorp.com/collections/consul/docker](https://learn.hashicorp.com/collections/consul/docker)
-[https://learn.hashicorp.com/tutorials/consul/service-mesh-with-envoy-proxy](https://learn.hashicorp.com/tutorials/consul/service-mesh-with-envoy-proxy)
+- [https://learn.hashicorp.com/collections/consul/docker](https://learn.hashicorp.com/collections/consul/docker)
+- [https://learn.hashicorp.com/tutorials/consul/service-mesh-with-envoy-proxy](https://learn.hashicorp.com/tutorials/consul/service-mesh-with-envoy-proxy)

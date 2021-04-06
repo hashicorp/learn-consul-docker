@@ -21,5 +21,5 @@ Deploy a Consul datacenter containing a single server and single client.
 
 ## Additional information
 
-[https://learn.hashicorp.com/collections/consul/docker](https://learn.hashicorp.com/collections/consul/docker)
-[https://learn.hashicorp.com/tutorials/consul/get-started](https://learn.hashicorp.com/tutorials/consul/get-started)
+- [https://learn.hashicorp.com/collections/consul/docker](https://learn.hashicorp.com/collections/consul/docker)
+- [https://learn.hashicorp.com/tutorials/consul/get-started](https://learn.hashicorp.com/tutorials/consul/get-started)
