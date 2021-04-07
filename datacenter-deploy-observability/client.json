@@ -1,0 +1,9 @@
+{
+    "node_name": "consul-client",
+    "server": false,
+    "datacenter": "dc1",
+    "data_dir": "/consul/data",
+    "retry_join":[
+        "consul-server"
+     ]
+}

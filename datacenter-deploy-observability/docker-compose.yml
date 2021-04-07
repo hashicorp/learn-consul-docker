@@ -1,0 +1,74 @@
+version: '3.7'
+
+services:
+  
+  consul-server:
+    image: hashicorp/consul:1.9.3
+    container_name: consul-server
+    restart: always
+    volumes:
+     - ./server.json:/consul/config/server.json:ro
+    networks:
+      - consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent"
+
+  consul-client:
+    image: hashicorp/consul:1.9.3
+    container_name: consul-client
+    restart: always
+    volumes:
+     - ./client.json:/consul/config/client.json:ro
+    networks:
+      - consul
+    command: "agent"
+
+  grafana:
+    image: grafana/grafana:7.5.3
+    container_name: grafana
+    restart: always
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/provisioning/:/etc/grafana/provisioning
+      - ./grafana/dashboards/:/var/lib/grafana/dashboards
+    networks:
+      - consul
+    ports:
+      - "3000:3000"
+
+  prometheus:
+    image: prom/prometheus:v2.26.0
+    container_name: prometheus
+    restart: always
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - consul
+    ports:
+      - 9090:9090
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    restart: always
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command: 
+      - '--path.procfs=/host/proc' 
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    networks:
+      - consul
+    ports:
+      - 9100:9100
+
+networks:
+  consul:
+    driver: bridge

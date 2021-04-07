@@ -1,0 +1,17 @@
+{
+    "node_name": "consul-server",
+    "server": true,
+    "bootstrap" : true,
+    "ui_config": {
+        "enabled" : true
+    },
+    "datacenter": "dc1",
+    "data_dir": "/consul/data",
+    "addresses": {
+        "http" : "0.0.0.0"
+    },
+    "telemetry" : {
+      "prometheus_retention_time" : "60s",
+      "disable_hostname" : true
+    }
+}
