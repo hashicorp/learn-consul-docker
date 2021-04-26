@@ -1,6 +1,6 @@
 ## Overview
 
-Deploy a Consul datacenter (one server and one client), Grafana container, Prometheus container, and a Node-Exporter container. These resources will be used to provide observability capabilities using metrics, logs, and traces.
+Deploy a Consul datacenter (one server and one client), Grafana container, Prometheus container, and a Node-Exporter container. These resources will be used to provide metrics observability capabilities.
 
 ## Prerequisites
 
@@ -31,10 +31,3 @@ Deploy a Consul datacenter (one server and one client), Grafana container, Prome
 - [https://learn.hashicorp.com/tutorials/consul/monitor-datacenter-health](https://learn.hashicorp.com/tutorials/consul/monitor-datacenter-health)
 - [https://learn.hashicorp.com/tutorials/consul/kubernetes-layer7-observability](https://learn.hashicorp.com/tutorials/consul/kubernetes-layer7-observability)
 - [https://www.consul.io/docs/agent/telemetry](https://www.consul.io/docs/agent/telemetry)
-
-## (optional) Correlate metrics/logs/traces
-1. Explore the [Grafana observability blog](https://grafana.com/blog/2020/03/31/how-to-successfully-correlate-metrics-logs-and-traces-in-grafana/)
-
-## (optional) Generate Consul trace logs
-1. `docker exec -d consul-server consul monitor -log-level=trace > /var/log/consul.log &`
-2. `docker exec -d consul-client consul monitor -log-level=trace > /var/log/consul.log &`
