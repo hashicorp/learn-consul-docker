@@ -2,7 +2,7 @@
 
 Deploy a Consul datacenter, an application stack, and an observability stack (Grafana + Loki + Tempo + Prometheus + Node-Exporter). These resources will be used to provide complete service mesh observability capabilities.
 
-![](images/consul_logs_tracing.png)
+![](images/consul_logs_and_tracing.png)
 
 ## Prerequisites
 
