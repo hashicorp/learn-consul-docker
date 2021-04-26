@@ -1,0 +1,64 @@
+# config file version
+apiVersion: 1
+
+# list of datasources that should be deleted from the database
+deleteDatasources:
+  - name: Prometheus
+    orgId: 1
+  - name: Tempo
+    orgId: 1
+
+# list of datasources to insert/update depending
+# what's available in the database
+datasources:
+- name: Prometheus
+  type: prometheus
+  access: proxy
+  orgId: 1
+  url: http://prometheus:9090
+  basicAuth: false
+  isDefault: false
+  version: 1
+  editable: false
+- name: Tempo
+  type: tempo
+  access: proxy
+  orgId: 1
+  url: http://tempo:3100
+  basicAuth: false
+  isDefault: false
+  version: 1
+  editable: false
+  apiVersion: 1
+  uid: tempo
+- name: Tempo-Multitenant
+  type: tempo
+  access: proxy
+  orgId: 1
+  url: http://tempo
+  basicAuth: false
+  isDefault: false
+  version: 1
+  editable: false
+  apiVersion: 1
+  uid: tempo-authed
+  jsonData:
+    httpHeaderName1: 'X-Scope-OrgID'
+  secureJsonData:
+    httpHeaderValue1: 'foo-bar-baz'
+- name: Loki
+  type: loki
+  access: proxy
+  orgId: 1
+  url: http://loki:3100
+  basicAuth: false
+  isDefault: false
+  version: 1
+  editable: false
+  apiVersion: 1
+  jsonData:
+    derivedFields:
+      - datasourceUid: tempo
+        matcherRegex: (?:traceID|trace_id)=(\w+)
+        name: TraceID
+        url: $${__value.raw}
