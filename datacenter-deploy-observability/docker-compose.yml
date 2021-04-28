@@ -5,11 +5,11 @@ version: "3.3"
 services:
 
   consul-server:
-    image: consul:1.6.1
+    image: consul:1.8.10
     container_name: consul-server
     command: ["consul", "agent", "-config-file=/config/config.hcl", "-config-dir=/config"]
     volumes:
-    - "./consul_config:/config"
+    - "./consul:/config"
     ports:
     - 8500:8500
     networks:
@@ -21,8 +21,10 @@ services:
         loki-url: 'http://localhost:3100/api/prom/push'
 
   ingress:
-    image: nicholasjackson/fake-service:v0.7.1
+    image: nicholasjackson/fake-service:v0.21.0
     container_name: ingress
+    depends_on:
+      - "consul-server"
     environment:
       LISTEN_ADDR: 0.0.0.0:9090
       UPSTREAM_URIS: "http://localhost:9091"
@@ -43,17 +45,19 @@ services:
       driver: loki
       options:
         loki-url: 'http://localhost:3100/api/prom/push'
-  ingress_envoy:
+  ingress_proxy:
     image: nicholasjackson/consul-envoy:v1.6.1-v0.10.0
-    container_name: ingress_envoy
+    container_name: ingress_proxy
+    depends_on:
+      - "ingress"
     environment:
       CONSUL_HTTP_ADDR: 10.5.0.2:8500
       CONSUL_GRPC_ADDR: 10.5.0.2:8502
       SERVICE_CONFIG: /config/ingress_v1.hcl
       CENTRAL_CONFIG: "/central_config/ingress_defaults.hcl"
     volumes:
-    - "./service_config:/config"
-    - "./central_config:/central_config"
+    - "./fake-service/service_config:/config"
+    - "./fake-service/central_config:/central_config"
     command: ["consul", "connect", "envoy", "-sidecar-for", "ingress-v1"]
     network_mode: "service:ingress"
     logging:
@@ -62,8 +66,10 @@ services:
         loki-url: 'http://localhost:3100/api/prom/push'
 
   web:
-    image: nicholasjackson/fake-service:v0.7.1
+    image: nicholasjackson/fake-service:v0.21.0
     container_name: web
+    depends_on:
+      - "consul-server"
     environment:
       LISTEN_ADDR: 0.0.0.0:9090
       UPSTREAM_URIS: "grpc://localhost:9091"
@@ -86,14 +92,16 @@ services:
   web_proxy:
     image: nicholasjackson/consul-envoy:v1.6.0-v0.10.0
     container_name: web_proxy
+    depends_on:
+      - "web"
     environment:
       CONSUL_HTTP_ADDR: 10.5.0.2:8500
       CONSUL_GRPC_ADDR: 10.5.0.2:8502
       SERVICE_CONFIG: /config/web_v1.hcl
       CENTRAL_CONFIG: "/central_config/web_defaults.hcl"
     volumes:
-    - "./service_config:/config"
-    - "./central_config:/central_config"
+    - "./fake-service/service_config:/config"
+    - "./fake-service/central_config:/central_config"
     command: ["consul", "connect", "envoy", "-sidecar-for", "web-v1"]
     network_mode: "service:web"
     logging:
@@ -102,8 +110,10 @@ services:
         loki-url: 'http://localhost:3100/api/prom/push'
 
   api:
-    image: nicholasjackson/fake-service:v0.7.1
+    image: nicholasjackson/fake-service:v0.21.0
     container_name: api
+    depends_on:
+      - "consul-server"
     environment:
       LISTEN_ADDR: 0.0.0.0:9090
       MESSAGE: "API response"
@@ -127,14 +137,16 @@ services:
   api_proxy:
     image: nicholasjackson/consul-envoy:v1.6.0-v0.10.0
     container_name: api_proxy
+    depends_on:
+      - "api"
     environment:
       CONSUL_HTTP_ADDR: 10.5.0.2:8500
       CONSUL_GRPC_ADDR: 10.5.0.2:8502
       SERVICE_CONFIG: /config/api_v1.hcl
       CENTRAL_CONFIG: "/central_config/api_defaults.hcl"
     volumes:
-    - "./service_config:/config"
-    - "./central_config:/central_config"
+    - "./fake-service/service_config:/config"
+    - "./fake-service/central_config:/central_config"
     command: ["consul", "connect", "envoy", "-sidecar-for", "api-v1"]
     network_mode: "service:api"
     logging:
@@ -207,8 +219,7 @@ services:
     container_name: tempo
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
-      - ./tempo_config/tempo-local.yaml:/etc/tempo.yaml
-      - ./example-data/tempo:/tmp/tempo   
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
     networks:
       vpcbr:
         ipv4_address: 10.5.0.9
@@ -226,8 +237,8 @@ services:
     container_name: grafana
     restart: always
     volumes:
-      - ./example-data/provisioning/datasources:/etc/grafana/provisioning/datasources
-      - ./example-data/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/dashboards:/var/lib/grafana/dashboards
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
