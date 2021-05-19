@@ -9,3 +9,5 @@ Specifically, the following articles and collections are currently supported by 
 - [Deploy a Consul Datacenter with Docker Compose](https://learn.hashicorp.com/tutorials/consul/docker-compose-datacenter)
 
 - [Capture Consul Events with Audit Logging](https://learn.hashicorp.com/tutorials/consul/audit-logging)
+
+- [Service Mesh Observability with Docker Compose](https://learn.hashicorp.com/tutorials/consul/docker-compose-observability)
