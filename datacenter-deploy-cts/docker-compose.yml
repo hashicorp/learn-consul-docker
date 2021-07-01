@@ -35,8 +35,7 @@ services:
     networks:
       - consul
     command: "consul-terraform-sync -config-file=/config/cts.hcl"
-
+    
 networks:
   consul:
     driver: bridge
-

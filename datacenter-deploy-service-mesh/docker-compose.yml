@@ -3,7 +3,7 @@ version: '3.7'
 services:
   
   consul-server:
-    image: hashicorp/consul:1.10.0
+    image: hashicorp/consul:1.9.6
     container_name: consul-server
     restart: always
     volumes:
@@ -17,7 +17,7 @@ services:
     command: "agent"
 
   consul-client1:
-    image: hashicorp/consul:1.10.0
+    image: hashicorp/consul:1.9.6
     container_name: consul-client1
     restart: always
     volumes:
@@ -31,7 +31,7 @@ services:
     command: "agent"
 
   consul-client2:
-    image: hashicorp/consul:1.10.0
+    image: hashicorp/consul:1.9.6
     container_name: consul-client2
     restart: always
     volumes:
