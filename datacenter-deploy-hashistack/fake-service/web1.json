@@ -1,0 +1,20 @@
+{
+  "node_name": "web1",
+  "datacenter": "dc1",
+  "data_dir": "/var/consul/data",
+  "log_level":"INFO",
+  "retry_join":[
+      "consul-server"
+   ],
+  "service": {
+    "name": "web",
+    "port": 9090, 
+    "check": {
+      "id": "counting-check",
+      "http": "http://localhost:9090/health",
+      "method": "GET",
+      "interval": "1s",
+      "timeout": "1s"
+    }
+  }
+}
