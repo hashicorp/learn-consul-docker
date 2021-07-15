@@ -42,6 +42,17 @@ Deploy, secure, and scale a sample microservice application with the Hashistack 
 14. consul + vault content (use-cases)
 15. scaling with terraform + consul + vault + application
 
+## Concepts Covered
+
+1. Terraform
+   1. Infrastructure as Code
+   2. Scaling
+2. Consul
+   1. Service Discovery
+   2. Health Checking
+3. Vault
+   1. Secret Management
+   2. Automatic Gossip Key Rotation
 
 ## Additional information
 

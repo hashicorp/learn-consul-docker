@@ -1,0 +1,21 @@
+{
+    "node_name": "consul-server1",
+    "datacenter": "dc1",
+    "primary_datacenter": "dc1",
+    "retry_join_wan": ["consul-server1", "consul-server2"],
+    "server": true,
+    "ui_config": {
+        "enabled" : true
+    },
+    "data_dir": "/consul/data",
+    "addresses": {
+        "http" : "0.0.0.0"
+    },
+    "encrypt": "aPuGh+5UDskRAbkLaXRzFoSOcSM+5vAK+NEYOWHJH7w=",
+    "verify_incoming": true,
+    "verify_outgoing": true,
+    "verify_server_hostname": true,
+    "ca_file": "/consul/config/certs/consul-agent-ca.pem",
+    "cert_file": "/consul/config/certs/dc1-server-consul-1.pem",
+    "key_file": "/consul/config/certs/dc1-server-consul-1-key.pem"
+}
