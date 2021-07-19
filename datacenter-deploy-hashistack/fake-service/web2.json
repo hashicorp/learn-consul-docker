@@ -1,5 +1,5 @@
 {
-  "node_name": "web1",
+  "node_name": "web2",
   "datacenter": "dc1",
   "data_dir": "/var/consul/data",
   "log_level":"INFO",

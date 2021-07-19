@@ -1,0 +1,16 @@
+resource "docker_container" "web2" {
+  image = docker_image.fake-service.latest
+  name  = "web2"
+  ports {
+    internal = 9090
+    external = 9092
+  }
+  env = ["LISTEN_ADDR=0.0.0.0:9090", "UPSTREAM_URIS=grpc://api:9091", "MESSAGE=Hello World", "NAME=web2", "SERVER_TYPE=http"]
+  networks_advanced {
+    name = "${docker_network.private_network.name}"
+  }
+  volumes {
+    host_path = "${var.pwd}/fake-service/web2.json"
+    container_path = "/var/consul/config/web2.json"
+  }
+}
