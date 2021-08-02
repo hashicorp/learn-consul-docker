@@ -1,0 +1,17 @@
+{
+    "node_name": "consul-client",
+    "data_dir": "/consul/data",
+    "auto_config":{
+        "enabled": true,
+		"intro_token": "NOT-SURE-WHAT-TO-PUT-HERE",
+        "server_addresses":[
+            "consul-server1",
+            "consul-server2",
+            "consul-server3"
+        ]
+    },
+    "verify_incoming": false,
+    "verify_outgoing": true,
+    "verify_server_hostname": true,
+    "ca_file": "/consul/config/certs/consul-agent-ca.pem"
+}
