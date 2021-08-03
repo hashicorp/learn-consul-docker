@@ -1,9 +1,10 @@
 {
     "node_name": "consul-client",
     "data_dir": "/consul/data",
+	"ports": {"https":8501},
     "auto_config":{
         "enabled": true,
-		"intro_token": "NOT-SURE-WHAT-TO-PUT-HERE",
+		"intro_token": "YOUR_JWT",
         "server_addresses":[
             "consul-server1",
             "consul-server2",
