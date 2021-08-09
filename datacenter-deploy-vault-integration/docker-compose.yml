@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  
+  consul-server1:
+    image: hashicorp/consul:1.10.1
+    container_name: consul-server1
+    restart: always
+    environment:
+      VAULT_ADDR: "http://vault-server:8200"
+    volumes:
+     - ./server1.json:/consul/config/server1.json
+     - ./certs/:/consul/config/certs/:ro
+    networks:
+      - consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent -bootstrap-expect=3"
+
+  consul-server2:
+    image: hashicorp/consul:1.10.1
+    container_name: consul-server2
+    restart: always
+    environment:
+      VAULT_ADDR: "http://vault-server:8200"
+    volumes:
+     - ./server2.json:/consul/config/server2.json
+     - ./certs/:/consul/config/certs/:ro
+    networks:
+      - consul
+    command: "agent -bootstrap-expect=3"
+
+  consul-server3:
+    image: hashicorp/consul:1.10.1
+    container_name: consul-server3
+    restart: always
+    environment:
+      VAULT_ADDR: "http://vault-server:8200"
+    volumes:
+     - ./server3.json:/consul/config/server3.json
+     - ./certs/:/consul/config/certs/:ro
+    networks:
+      - consul
+    command: "agent -bootstrap-expect=3"
+
+  vault-server:
+    image: vault:latest
+    container_name: vault-server
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_ADDR: "http://0.0.0.0:8200"
+      VAULT_DEV_ROOT_TOKEN_ID: "vault-plaintext-root-token"
+    cap_add:
+      - IPC_LOCK
+    networks:
+      - consul
+
+networks:
+  consul:
+    driver: bridge
