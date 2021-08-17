@@ -1,0 +1,20 @@
+{
+  "node_name": "vault-server",
+  "datacenter": "dc1",
+  "data_dir": "/var/consul/data",
+  "log_level":"INFO",
+  "retry_join":[
+      "consul-server"
+   ],
+  "service": {
+    "name": "vault",
+    "port": 8200, 
+    "check": {
+      "id": "vault-check",
+      "http": "http://localhost:8200",
+      "method": "GET",
+      "interval": "10s",
+      "timeout": "1s"
+    }
+  }
+}

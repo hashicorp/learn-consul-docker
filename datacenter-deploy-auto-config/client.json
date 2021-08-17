@@ -4,7 +4,7 @@
 	"ports": {"https":8501},
     "auto_config":{
         "enabled": true,
-		"intro_token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXVkaWVuY2UiXSwiZXhwIjoxNjI4NjU1ODgwLCJpc3MiOiJhdXRvLWNvbmZpZy1jbHVzdGVyIiwianRpIjoiYzUzMmZjODMtM2IxNC0zNzcyLWRkOWMtZDcwNDc4NWY2ODY2IiwibmJmIjoxNjI4NjEyNjIwLCJzdWIiOiJjb25zdWwtY2xpZW50In0.eTqMN0iXh4WbeP-6UZwMQfgTT_reEeOlzdCGtrRwHtxa5lBs4Ae3ZJJMrlPA_qJKgh7iQ_665T176FvNXgAnxA",
+		"intro_token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXVkaWVuY2UiXSwiZXhwIjoxNjI5MTg0NjAyLCJpc3MiOiJhdXRvLWNvbmZpZy1jbHVzdGVyIiwianRpIjoiY2UxNjlhMjAtMGI5My1lMDQyLTA5YzEtMzlkZWRmZjFkN2QwIiwibmJmIjoxNjI5MTQxMzQyLCJzdWIiOiJjb25zdWwtY2xpZW50In0.f67KU3Iyjom0Wy5__C9Jex0VgY_h4VFU4DNWNi54cXiYHwzIdHnAfXBj7eWTKcuBY3YIYINqQvYaRhqKmUA80A",
         "server_addresses":[
             "consul-server1",
             "consul-server2",

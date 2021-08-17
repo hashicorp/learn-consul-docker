@@ -1,0 +1,39 @@
+{
+    "node_name": "consul-server",
+    "server": true,
+    "bootstrap" : true,
+    "ui_config": {
+        "enabled" : true
+    },
+    "datacenter": "dc1",
+    "data_dir": "/consul/data",
+    "log_level":"INFO",
+    "addresses": {
+        "http" : "0.0.0.0"
+    },
+    "bind_addr": "0.0.0.0",
+    "client_addr": "0.0.0.0",
+    "advertise_addr": "10.5.0.2",
+    "ports": {
+        "grpc": 8502,
+        "dns": 53
+    },
+    "connect": {
+        "enabled": true
+    },
+    "service": {
+        "id": "dns",
+        "name": "dns",
+        "tags": ["primary"],
+        "address": "localhost",
+        "port": 53,
+        "enable_tag_override": false,
+        "check": {
+          "id": "dns",
+          "name": "Consul DNS TCP on port 53",
+          "tcp": "localhost:53",
+          "interval": "10s",
+          "timeout": "1s"
+        }
+      }
+}

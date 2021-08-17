@@ -1,0 +1,89 @@
+version: '3.7'
+
+services:
+  
+  consul-server:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-server
+    hostname: consul-server
+    restart: always
+    volumes:
+     - ./server.json:/consul/config/server.json:ro
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.2
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+      - "53:53"
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+      - 1.1.1.1 #Cloudflare Public DNS
+    command: "agent"
+
+  consul-client1:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-client1
+    hostname: consul-client1
+    restart: always
+    volumes:
+     - ./client1.json:/consul/config/client1.json:ro
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.3
+    ports:
+      - "9003:9003"
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+      - 1.1.1.1 #Cloudflare Public DNS
+    environment:
+      - PORT=9003
+    command: "agent"
+
+  consul-client2:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-client2
+    hostname: consul-client2
+    restart: always
+    volumes:
+     - ./client2.json:/consul/config/client2.json:ro
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.4
+    ports:
+      - "9004:9004"
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+      - 1.1.1.1 #Cloudflare Public DNS
+    environment:
+      - PORT=9004
+    command: "agent"
+
+  consul-client3:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-client3
+    hostname: consul-client3
+    restart: always
+    volumes:
+     - ./client3.json:/consul/config/client3.json:ro
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+    ports:
+      - "9002:9002"
+    dns:
+      - 10.5.0.2 #Consul Server DNS name
+      - 1.1.1.1 #Cloudflare Public DNS
+    environment:
+      - PORT=9002
+      - COUNTING_SERVICE_URL=http://localhost:5000
+    command: "agent"
+    
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
