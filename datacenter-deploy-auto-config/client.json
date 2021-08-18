@@ -4,7 +4,7 @@
 	"ports": {"https":8501},
     "auto_config":{
         "enabled": true,
-		"intro_token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXVkaWVuY2UiXSwiZXhwIjoxNjI5MTg0NjAyLCJpc3MiOiJhdXRvLWNvbmZpZy1jbHVzdGVyIiwianRpIjoiY2UxNjlhMjAtMGI5My1lMDQyLTA5YzEtMzlkZWRmZjFkN2QwIiwibmJmIjoxNjI5MTQxMzQyLCJzdWIiOiJjb25zdWwtY2xpZW50In0.f67KU3Iyjom0Wy5__C9Jex0VgY_h4VFU4DNWNi54cXiYHwzIdHnAfXBj7eWTKcuBY3YIYINqQvYaRhqKmUA80A",
+        "intro_token_file": "/consul/config/tokens/jwt",
         "server_addresses":[
             "consul-server1",
             "consul-server2",
