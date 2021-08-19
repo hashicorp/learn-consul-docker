@@ -1,5 +1,5 @@
 {
-    "node_name": "consul-server1",
+    "node_name": "consul-server3",
     "server": true,
     "ui_config": {
         "enabled" : true
@@ -9,8 +9,8 @@
         "http" : "0.0.0.0"
     },
     "retry_join":[
-        "consul-server2",
-        "consul-server3"
+        "consul-server1",
+        "consul-server2"
     ],
 	"acl": { 
 		"enabled": true,
@@ -28,7 +28,7 @@
 			"static": {
 				"oidc_discovery_url": "http://vault-server:8200/v1/identity/oidc",
 				"bound_issuer": "http://vault-server:8200/v1/identity/oidc",
-				"bound_audiences": [],
+				"bound_audiences": ["consul-client"],
 				"claim_mappings": {
 					"sub": "node"
 				},

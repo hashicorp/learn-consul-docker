@@ -17,38 +17,31 @@ Deploy a three-server Consul datacenter that utilizes `auto-config` for allowing
 
 # Vault testing procedure
 
-1. Open an interactive shell to the Vault server:
+1. Open an interactive shell to the Vault server
    1. `docker exec -it vault-server ash`
-2. Install curl
-   1. `apk add curl`
-3. Configure Identity Tokens Backend
-   1. `curl --request POST --header "X-Vault-Token: vault-plaintext-root-token" --data @/payloads/issuer.json http://127.0.0.1:8200/v1/identity/oidc/config`
-4. Login to Vault server with the pre-configured root token:
+2. Login to Vault server with the pre-configured root token
    1. Initialize login: `vault login`
    2. Token: `vault-plaintext-root-token`
-5. Do this
+3. Create a key
    1. `vault write identity/oidc/key/oidc-key-1 allowed_client_ids="*"`
-6. Do this
-   1. `vault write identity/oidc/role/oidc-role-1 key="oidc-key-1"`
-7. Do this
-vault policy write oidc-policy -<<EOF
-path "identity/oidc/token/oidc-role-1" {
-  capabilities = ["read"]
-}
-EOF
-8. Enable Vault's username/password secrets engine: 
+4. Create a role
+   1. `vault write identity/oidc/role/oidc-role-1 ttl=12h key="oidc-key-1" client_id="consul-client"`
+5. Create a policy
+   1. `vault policy write oidc-policy /vault/policies/policy.json`
+6. Enable Vault's username/password secrets engine
    1. `vault auth enable userpass`
-9. Do this
-   1. `vault write auth/userpass/users/russ password=password policies=oidc-policy`
-10. Login as the newly created user
-    1.  `vault login -method=userpass username=russ`
+7. Create an example user with the oidc-policy attached
+   1. `vault write auth/userpass/users/example password=password policies=oidc-policy`
+8. Login as the newly created user
+    1.  `vault login -method=userpass username=example`
     2.  Password: `password`
-11. Get a signed ID token
+9.  Get a signed ID token
     1.  `vault read identity/oidc/token/oidc-role-1`
-12. Copy the `token` value to the /tokens/jwt file in your working directory.
-13. Delete all Docker containers EXCEPT `vault-server`
-14. `docker-compose up -d`
-15. Notice that `consul-client` has now successfully joined the Consul datacenter using the `auto_config` method.
+10. Copy the `token` value to the /tokens/jwt file in your working directory, then save the changes
+11. Delete then recreate the `consul-client` container
+    1.  `docker rm consul-client --force` 
+    2.  `docker-compose up -d`
+12. Notice that `consul-client` has now successfully joined the Consul datacenter using the `auto_config` method.
 
 
 

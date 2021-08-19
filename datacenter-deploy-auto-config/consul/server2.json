@@ -28,7 +28,7 @@
 			"static": {
 				"oidc_discovery_url": "http://vault-server:8200/v1/identity/oidc",
 				"bound_issuer": "http://vault-server:8200/v1/identity/oidc",
-				"bound_audiences": [],
+				"bound_audiences": ["consul-client"],
 				"claim_mappings": {
 					"sub": "node"
 				},

@@ -1,0 +1,7 @@
+{
+    "path": {
+      "identity/oidc/token/oidc-role-1": {
+        "policy": "read"
+      }
+    }
+  }
