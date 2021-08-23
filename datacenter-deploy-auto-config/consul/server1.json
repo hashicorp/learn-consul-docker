@@ -28,11 +28,13 @@
 			"static": {
 				"oidc_discovery_url": "http://vault-server:8200/v1/identity/oidc",
 				"bound_issuer": "http://vault-server:8200/v1/identity/oidc",
-				"bound_audiences": ["consul-client"],
+				"bound_audiences": ["consul-cluster-dc1"],
 				"claim_mappings": {
-					"sub": "node"
+					"consul/hostname": "node_name"
 				},
-				"claim_assertions": []
+				"claim_assertions": [
+					"value.node_name == \"${node}\""
+				]
 			}
 		}
 	},
