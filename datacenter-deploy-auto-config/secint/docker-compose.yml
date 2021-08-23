@@ -6,8 +6,6 @@ services:
     image: hashicorp/consul:1.10.1
     container_name: consul-server1
     hostname: consul-server1
-    depends_on: 
-      - vault-server
     restart: always
     volumes:
      - ./consul/server1.json:/consul/config/server1.json
@@ -24,8 +22,6 @@ services:
     image: hashicorp/consul:1.10.1
     container_name: consul-server2
     hostname: consul-server2
-    depends_on: 
-      - vault-server
     restart: always
     volumes:
      - ./consul/server2.json:/consul/config/server2.json
@@ -38,8 +34,6 @@ services:
     image: hashicorp/consul:1.10.1
     container_name: consul-server3
     hostname: consul-server3
-    depends_on: 
-      - vault-server
     restart: always
     volumes:
      - ./consul/server3.json:/consul/config/server3.json
