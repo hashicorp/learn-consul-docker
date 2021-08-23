@@ -1,0 +1,47 @@
+{
+    "node_name": "consul-server3",
+    "server": true,
+    "ui_config": {
+        "enabled" : true
+    },
+    "data_dir": "/consul/data",
+    "addresses": {
+        "http" : "0.0.0.0"
+    },
+    "retry_join":[
+        "consul-server1",
+        "consul-server2"
+    ],
+	"acl": { 
+		"enabled": true,
+		"default_policy": "deny",
+		"enable_token_persistence": true,
+		"tokens": {
+			"master": "e95b599e-166e-7d80-08ad-aee76e7ddf19",
+			"agent": "e95b599e-166e-7d80-08ad-aee76e7ddf19"
+		}
+	},
+	"connect": { "enabled": true },
+	"auto_config": {
+		"authorization": {
+			"enabled": true,
+			"static": {
+				"jwt_validation_pub_keys": ["/consul/config/certs/validation_pub_key.pem"],				"bound_issuer": "auto-config-cluster",
+				"bound_audiences": ["audience"],
+				"claim_mappings": {
+					"sub": "node"
+				},
+				"claim_assertions": [
+					"value.node == \"${node}\""
+				]
+			}
+		}
+	},
+    "encrypt": "aPuGh+5UDskRAbkLaXRzFoSOcSM+5vAK+NEYOWHJH7w=",
+    "verify_incoming": true,
+    "verify_outgoing": true,
+    "verify_server_hostname": true,
+    "ca_file": "/consul/config/certs/consul-agent-ca.pem",
+    "cert_file": "/consul/config/certs/dc1-server-consul-0.pem",
+    "key_file": "/consul/config/certs/dc1-server-consul-0-key.pem"
+}

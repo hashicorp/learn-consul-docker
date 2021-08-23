@@ -12,8 +12,9 @@ Deploy a three-server Consul datacenter that utilizes `auto-config` for allowing
 ## Deployment procedure
 
 1. Clone [learn-consul-docker](https://github.com/hashicorp/learn-consul-docker) repository.
-2. Navigate to the `auto_config` directory.
-3. `docker-compose up -d`
+2. Navigate to the `datacenter-deploy-auto-config` directory.
+3. Navigate to the desired test case directory `vault` or `secint`
+4. `docker-compose up -d`
 
 # Vault testing procedure
 
@@ -28,23 +29,20 @@ Deploy a three-server Consul datacenter that utilizes `auto-config` for allowing
    1. `vault write identity/oidc/role/oidc-role-1 ttl=12h key="oidc-key-1" client_id="consul-cluster-dc1" template='{"consul": {"hostname": "consul-client" } }'`
 5. Create a policy
    1. `vault policy write oidc-policy /vault/policies/policy.json`
-6. Test:
-   1. `vault token create -policy=oidc-policy -metadata=consul=hostname=consul-client`
-   2. `vault login -method=token`
-7. Enable Vault's username/password secrets engine
+6. Enable Vault's username/password secrets engine
    1. `vault auth enable userpass`
-8. Create an example user with the oidc-policy attached
+7. Create an example user with the oidc-policy attached
    1. `vault write auth/userpass/users/example password=password policies=oidc-policy`
-9.  Login as the newly created user
+8.  Login as the newly created user
     1.  `vault login -method=userpass username=example`
     2.  Password: `password`
-10. Get a signed ID token
+9.  Get a signed ID token
     1.  `vault read identity/oidc/token/oidc-role-1`
-11. Copy the `token` value to the /tokens/jwt file in your working directory, then save the changes
-12. Delete then recreate the `consul-client` container
-    1.  `docker rm consul-client --force` 
+10. Copy the `token` value to the /tokens/jwt file in your working directory, then save the changes
+11. Delete then recreate the `consul-client` container
+    1.  `docker rm consul-client --force`
     2.  `docker-compose up -d`
-13. Notice that `consul-client` has now successfully joined the Consul datacenter using the `auto_config` method.
+12. Notice that `consul-client` has now successfully joined the Consul datacenter using the `auto_config` method.
 
 ## Learning more about Node Assertions and Config Maps
 

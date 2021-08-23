@@ -43,7 +43,8 @@ sleep 7s
 docker exec -d consul-client3 unzip dashboard-service_linux_amd64.zip
 sleep 7s
 # Start Dashboard service as background process in container
-docker exec -d consul-client3 ./dashboard-service_linux_amd64 &
+docker exec -d consul-client3 COUNTING_SERVICE_URL=http://counting.service.consul:5000 ./dashboard-service_linux_amd64 &
+#docker exec -d consul-client3 ./dashboard-service_linux_amd64 &
 sleep 1s
 # Start Consul Sidecar Proxy for Dashboard service
 docker exec -d consul-client3 consul connect proxy -sidecar-for dashboard &
