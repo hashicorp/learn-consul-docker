@@ -27,12 +27,13 @@
 			"enabled": true,
 			"static": {
 				"jwt_validation_pub_keys": ["-----BEGIN CERTIFICATE-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEsroNIWasf/FbIbwFwoYx5RxKL+cKsKJ5UPej+SQ7taJryoK1Cu1I5yvRPrFAW0anyDzVL8ZOASBCDuEp37h95g==\n-----END CERTIFICATE-----\n"],
-				"bound_audiences": ["audience"],
+				"bound_issuer": "secint",
+				"bound_audiences": ["consul-cluster-dc1"],
 				"claim_mappings": {
-					"sub": "node"
+					"sub": "node_name"
 				},
 				"claim_assertions": [
-					"value.node == \"${node}\""
+					"value.node_name == \"${node}\""
 				]
 			}
 		}
