@@ -43,7 +43,7 @@ services:
     command: "agent -bootstrap-expect=3"
 
   consul-client:
-    image: hashicorp/consul:1.10.1
+    build: .
     container_name: consul-client
     hostname: consul-client
     restart: always
