@@ -1,0 +1,72 @@
+version: '3.7'
+
+services:
+  
+  consul-server:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-server
+    hostname: consul-server
+    restart: always
+    volumes:
+     - ./server.json:/consul/config/server.json:ro
+    networks:
+      - consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent"
+
+  consul-client1:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-client1
+    hostname: consul-client1
+    restart: always
+    volumes:
+     - ./client1.json:/consul/config/client1.json:ro
+    networks:
+      - consul
+    ports:
+      - "9003:9003"
+    environment:
+      - PORT=9003
+    command: "agent"
+
+  consul-client2:
+    image: hashicorp/consul:1.9.6
+    container_name: consul-client2
+    hostname: consul-client2
+    restart: always
+    volumes:
+     - ./client2.json:/consul/config/client2.json:ro
+    networks:
+      - consul
+    ports:
+      - "9002:9002"
+    environment:
+      - PORT=9002
+      - COUNTING_SERVICE_URL=http://localhost:5000
+    command: "agent"
+
+  weavescope:
+    image: weaveworks/scope:latest
+    container_name: weavescope
+    hostname: weavescope
+    pid: "host"
+    privileged: true
+    networks:
+      - consul
+    ports:
+      - "4040:4040"
+    labels:
+      - "works.weave.role=system"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:rw"
+    command:
+      - "--probe.docker=true"
+      - "--weave=false"
+    
+networks:
+  consul:
+    driver: bridge
+

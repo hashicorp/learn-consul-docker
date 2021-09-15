@@ -1,0 +1,35 @@
+{
+  "node_name": "consul-client2",
+  "datacenter": "dc1",
+  "data_dir": "/consul/data",
+  "log_level":"INFO",
+  "retry_join":[
+      "consul-server"
+   ],
+  "service": {
+    "name": "dashboard",
+    "port": 9002, 
+    "connect": {
+      "sidecar_service": {
+        "proxy": {
+          "upstreams": [
+            {
+              "destination_name": "counting",
+              "local_bind_port": 5000
+            }
+          ]
+        }
+      }
+    },
+    "check": {
+      "id": "dashboard-check",
+      "http": "http://localhost:9002/health",
+      "method": "GET",
+      "interval": "1s",
+      "timeout": "1s"
+    }
+  },
+  "ports": {
+    "grpc": 8502
+    }
+}

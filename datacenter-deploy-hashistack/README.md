@@ -57,6 +57,10 @@ Deploy, secure, and scale a sample microservice application with the Hashistack 
    2. Token: `vault-plaintext-root-token`
 3. Enable Vault's ______ secrets engine: 
    1. `vault secrets enable ______`
+4. Configure the secrets engine:
+   1. content
+5. Store a secret
+6. Retrieve a secret
 
 
 ## Consul + vault content (use-cases)
