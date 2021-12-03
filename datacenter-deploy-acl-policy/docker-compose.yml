@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  
+  consul-server1:
+    image: consul:1.4
+    container_name: consul-server1
+    restart: always
+    environment:
+      CONSUL_HTTP_ADDR: "consul-server1:8500"
+      CONSUL_HTTP_TOKEN: "e95b599e-166e-7d80-08ad-aee76e7ddf19"
+    volumes:
+     - ./server1.json:/consul/config/server1.json
+     - ./acls/:/consul/config/acls/
+    networks:
+      - consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent -bootstrap-expect=1"
+
+  consul-client1:
+    image: consul:1.4
+    container_name: consul-client1
+    restart: always
+    volumes:
+     - ./client1.json:/consul/config/client1.json
+     - ./acls/:/consul/config/acls/
+    networks:
+      - consul
+    command: "agent"
+
+networks:
+  consul:
+    driver: bridge
