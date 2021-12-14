@@ -6,5 +6,13 @@
         "consul-server1",
         "consul-server2",
         "consul-server3"
-     ]
+    ],
+	"acl": { 
+		"enabled": true,
+		"default_policy": "deny",
+		"enable_token_persistence": true,
+		"tokens": {
+			"agent": "my-agent-token"
+		}
+	}
 }
