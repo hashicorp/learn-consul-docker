@@ -3,7 +3,7 @@ version: '3.7'
 services:
   
   consul-server1:
-    image: hashicorp/consul:1.10.1
+    image: hashicorp/consul:1.11.2
     container_name: consul-server1
     hostname: consul-server1
     restart: always
@@ -19,7 +19,7 @@ services:
     command: "agent -bootstrap-expect=3"
 
   consul-server2:
-    image: hashicorp/consul:1.10.1
+    image: hashicorp/consul:1.11.2
     container_name: consul-server2
     hostname: consul-server2
     restart: always
@@ -31,7 +31,7 @@ services:
     command: "agent -bootstrap-expect=3"
 
   consul-server3:
-    image: hashicorp/consul:1.10.1
+    image: hashicorp/consul:1.11.2
     container_name: consul-server3
     hostname: consul-server3
     restart: always

@@ -17,7 +17,7 @@
 		"default_policy": "deny",
 		"enable_token_persistence": true,
 		"tokens": {
-			"master": "e95b599e-166e-7d80-08ad-aee76e7ddf19",
+			"initial_management": "e95b599e-166e-7d80-08ad-aee76e7ddf19",
 			"agent": "e95b599e-166e-7d80-08ad-aee76e7ddf19"
 		}
 	},
@@ -26,7 +26,7 @@
 		"authorization": {
 			"enabled": true,
 			"static": {
-				"jwt_validation_pub_keys": ["-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFlUd7FoWSPtRl5maa58XDDjiFplNBxtai41Hq8rnyfQxirYQoLKHKakuZAGpn3PwYewEbYrB+b1f7/P6DzWBRg==\n-----END PUBLIC KEY-----\n"],
+				"jwt_validation_pub_keys": ["-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFGvHJZCj5SsFlOI48A+Dc4Hezywd\nN8YYjMAQrPTcG6f3jdIEBsh/sVgFTyDYmnwuX6S2ZE3nJ5TtUeJxwwg4EQ==\n-----END PUBLIC KEY-----"],
 				"bound_issuer": "secint",
 				"bound_audiences": ["consul-cluster-dc1"],
 				"claim_mappings": {
