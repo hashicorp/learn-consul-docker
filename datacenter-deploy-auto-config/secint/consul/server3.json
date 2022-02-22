@@ -26,7 +26,7 @@
 		"authorization": {
 			"enabled": true,
 			"static": {
-				"jwt_validation_pub_keys": ["-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFGvHJZCj5SsFlOI48A+Dc4Hezywd\nN8YYjMAQrPTcG6f3jdIEBsh/sVgFTyDYmnwuX6S2ZE3nJ5TtUeJxwwg4EQ==\n-----END PUBLIC KEY-----"],
+				"jwt_validation_pub_keys": ["-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFGvHJZCj5SsFlOI48A+Dc4Hezywd\nN8YYjMAQrPTcG6f3jdIEBsh/sVgFTyDYmnwuX6S2ZE3nJ5TtUeJxwwg4EQ==\n-----END PUBLIC KEY-----\n"],
 				"bound_issuer": "secint",
 				"bound_audiences": ["consul-cluster-dc1"],
 				"claim_mappings": {
