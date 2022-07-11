@@ -9,7 +9,8 @@
     "data_dir": "/consul/data",
     "log_level":"INFO",
     "addresses": {
-        "http" : "0.0.0.0"
+        "http" : "0.0.0.0",
+        "dns" : "0.0.0.0"
     },
     "service": {
         "id": "dns",
