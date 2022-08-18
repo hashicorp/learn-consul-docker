@@ -19,3 +19,7 @@ Specifically, the following articles and collections are currently supported by 
 # Additional Assets
 
 This repository also contains quick start Docker Compose assets that can be used to deploy Consul in various configurations. Rather than a supporting tutorial, a README file is included that will walk you through steps that will highlight various Consul concepts and scenarios.
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
