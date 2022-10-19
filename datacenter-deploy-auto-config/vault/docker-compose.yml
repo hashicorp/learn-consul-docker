@@ -11,7 +11,7 @@ services:
     restart: always
     volumes:
      - ./consul/server1.json:/consul/config/server1.json
-     - ./certs/:/consul/config/certs/:ro
+     - ./certs/:/consul/config/certs/
     networks:
       - hashicorp
     ports:
@@ -29,7 +29,7 @@ services:
     restart: always
     volumes:
      - ./consul/server2.json:/consul/config/server2.json
-     - ./certs/:/consul/config/certs/:ro
+     - ./certs/:/consul/config/certs/
     networks:
       - hashicorp
     command: "agent -bootstrap-expect=3"
@@ -43,7 +43,7 @@ services:
     restart: always
     volumes:
      - ./consul/server3.json:/consul/config/server3.json
-     - ./certs/:/consul/config/certs/:ro
+     - ./certs/:/consul/config/certs/
     networks:
       - hashicorp
     command: "agent -bootstrap-expect=3"
@@ -55,7 +55,7 @@ services:
     restart: always
     volumes:
      - ./consul/client.json:/consul/config/client.json
-     - ./certs/:/consul/config/certs/:ro
+     - ./certs/:/consul/config/certs/
      - ./tokens/:/consul/config/tokens/
     networks:
       - hashicorp
