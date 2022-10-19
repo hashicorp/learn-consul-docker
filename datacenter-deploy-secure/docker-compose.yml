@@ -1,7 +1,14 @@
 version: '3.7'
 
 services:
-  
+  consul-init-certs:
+    image: hashicorp/consul:1.11.2
+    working_dir: /consul/config/certs 
+    volumes:
+      - ./certs/:/consul/config/certs/
+    entrypoint: sh
+    command: -c "rm /consul/config/certs/*.pem && /bin/consul tls ca create && /bin/consul tls cert create -server -dc dc1"
+
   consul-server1:
     image: hashicorp/consul:1.11.2
     container_name: consul-server1
@@ -16,6 +23,9 @@ services:
       - "8600:8600/tcp"
       - "8600:8600/udp"
     command: "agent -bootstrap-expect=3"
+    depends_on:
+      consul-init-certs:
+        condition: service_completed_successfully
 
   consul-server2:
     image: hashicorp/consul:1.11.2
@@ -27,6 +37,9 @@ services:
     networks:
       - consul
     command: "agent -bootstrap-expect=3"
+    depends_on:
+      consul-init-certs:
+        condition: service_completed_successfully
 
   consul-server3:
     image: hashicorp/consul:1.11.2
@@ -38,6 +51,9 @@ services:
     networks:
       - consul
     command: "agent -bootstrap-expect=3"
+    depends_on:
+      consul-init-certs:
+        condition: service_completed_successfully
 
   consul-client:
     image: hashicorp/consul:1.11.2
