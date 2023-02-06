@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 # Configures Consul-Terraform-Sync connection with a Consul agent to perform queries to the Consul catalog
 consul {
   address = "consul-server:8500"
